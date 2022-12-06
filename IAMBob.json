@@ -1,0 +1,54 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "VisualEditor0",
+            "Effect": "Allow",
+            "Action": [
+                "s3:ListBucket",
+                "s3:GetBucketLocation"
+            ],
+            "Resource": "arn:aws:s3:::<ACCOUNT-ID>-backup-bucket"
+        },
+        {
+            "Sid": "VisualEditor1",
+            "Effect": "Allow",
+            "Action": [
+                "s3:PutObject",
+                "s3:GetObjectAcl",
+                "s3:GetObject",
+                "s3:DeleteObject",
+                "s3:PutObjectAcl"
+            ],
+            "Resource": "arn:aws:s3:::<ACCOUNT-ID>-backup-bucket/*"
+        },
+        {
+            "Sid": "VisualEditor2",
+            "Effect": "Allow",
+            "Action": "s3:ListAllMyBuckets",
+            "Resource": "arn:aws:s3:::*"
+        },
+        {
+            "Sid": "VisualEditor3",
+            "Effect": "Deny",
+            "Action": [
+                "kms:ScheduleKeyDeletion",
+                "kms:PutKeyPolicy",
+                "s3:PutLifecycleConfiguration"
+            ],
+            "Resource": [
+                "arn:aws:s3:::*",
+                "arn:aws:kms:*:636654512113:key/*"
+            ]
+        },
+        {
+            "Sid": "VisualEditor4",
+            "Effect": "Deny",
+            "Action": [
+                "s3:DeleteObjectVersion",
+                "s3:DeleteObjectVersionTagging"
+            ],
+            "Resource": "arn:aws:s3:::*/*"
+        }
+    ]
+}
